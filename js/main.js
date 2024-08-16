@@ -1,189 +1,12 @@
-// PRODUCTOS
-const productos = [
-  // Accesorios
-  {
-      id: "accesorio-01",
-      titulo: "Accesorio 01",
-      imagen: "./img/accesorios/01.png",
-      categoria: {
-          nombre: "Accesorios",
-          id: "accesorios"
-      },
-      precio: 1000
-  },
-  {
-    id: "accesorio-02",
-    titulo: "Accesorio 02",
-    imagen: "./img/accesorios/02.png",
-    categoria: {
-        nombre: "Accesorios",
-        id: "accesorios"
-    },
-    precio: 1000
-  },
-  {
-    id: "accesorio-03",
-    titulo: "Accesorio 03",
-    imagen: "./img/accesorios/03.png",
-    categoria: {
-        nombre: "Accesorios",
-        id: "accesorios"
-    },
-    precio: 1000
-  },
-  {
-    id: "accesorio-04",
-    titulo: "Accesorio 04",
-    imagen: "./img/accesorios/04.png",
-    categoria: {
-        nombre: "Accesorios",
-        id: "accesorios"
-    },
-    precio: 1000
-  },
-  {
-    id: "accesorio-05",
-    titulo: "Accesorio 05",
-    imagen: "./img/accesorios/05.png",
-    categoria: {
-        nombre: "Accesorios",
-        id: "accesorios"
-    },
-    precio: 1000
-  },
-  // Celulares
-  {
-    id: "celular-01",
-    titulo: "Celular 01",
-    imagen: "./img/celulares/01.png",
-    categoria: {
-        nombre: "Celulares",
-        id: "celulares"
-    },
-    precio: 1000
-  },
-  {
-    id: "celular-02",
-    titulo: "Celular 02",
-    imagen: "./img/celulares/02.png",
-    categoria: {
-        nombre: "Celulares",
-        id: "celulares"
-    },
-    precio: 1000
-  },
-  {
-    id: "celular-03",
-    titulo: "Celular 03",
-    imagen: "./img/celulares/03.png",
-    categoria: {
-        nombre: "Celulares",
-        id: "celulares"
-    },
-    precio: 1000
-  },
-  {
-    id: "celular-04",
-    titulo: "Celular 04",
-    imagen: "./img/celulares/04.png",
-    categoria: {
-        nombre: "Celulares",
-        id: "celulares"
-    },
-    precio: 1000
-  },
-  {
-    id: "celular-05",
-    titulo: "Celular 05",
-    imagen: "./img/celulares/05.png",
-    categoria: {
-        nombre: "Celulares",
-        id: "celulares"
-    },
-    precio: 1000
-  },
-  // Consolas
-  {
-    id: "consola-01",
-    titulo: "Consola 01",
-    imagen: "./img/consolas/01.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-02",
-    titulo: "Consola 02",
-    imagen: "./img/consolas/02.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-03",
-    titulo: "Consola 03",
-    imagen: "./img/consolas/03.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-04",
-    titulo: "Consola 04",
-    imagen: "./img/consolas/04.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-05",
-    titulo: "Consola 05",
-    imagen: "./img/consolas/05.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-06",
-    titulo: "Consola 06",
-    imagen: "./img/consolas/06.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-07",
-    titulo: "Consola 07",
-    imagen: "./img/consolas/07.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-  {
-    id: "consola-08",
-    titulo: "Consola 08",
-    imagen: "./img/consolas/08.png",
-    categoria: {
-        nombre: "Consolas",
-        id: "consolas"
-    },
-    precio: 1000
-  },
-];
+let productos = [];
+
+fetch("./js/productos.json")
+  .then(response => response.json())
+  .then(data => {
+    productos = data;
+    cargarProductos(productos);
+  })
+
 
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
@@ -214,8 +37,6 @@ function cargarProductos(productosElegidos) {
 
   actualizarBotonesAgregar();
 }
-
-cargarProductos(productos);
 
 botonesCategorias.forEach(boton => {
   boton.addEventListener("click", (e) => {
@@ -272,6 +93,26 @@ function agregarAlCarrito(e) {
   actualizarNumerito();
 
   localStorage.setItem("productos-en-carrito", JSON.stringify(productosEnCarrito));
+
+  Toastify({
+    text: "Producto agregado",
+    offset: {
+      x: "1.5rem", // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+      y: "1.5rem" // vertical axis - can be a number or a string indicating unity. eg: '2em'
+    },
+    duration: 3000,
+    /* destination: "https://github.com/apvarun/toastify-js",
+    newWindow: true, */
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "right", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #4b33a8, #5f36fd)",
+      borderRadius: ".75rem"
+    },
+    onClick: function(){} // Callback after click
+  }).showToast();
 }
 
 function actualizarNumerito() {
